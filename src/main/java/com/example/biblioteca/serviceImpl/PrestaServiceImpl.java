@@ -2,6 +2,7 @@ package com.example.biblioteca.serviceImpl;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +24,8 @@ public class PrestaServiceImpl implements PrestaService {
         } else {
             savedPresta = prestaRepository.findById(id).orElse(null);
         }
-        savedPresta.setIdLibro(presta.getIdLibro());
-        savedPresta.setIdEjemplar(presta.getIdEjemplar());
-        savedPresta.setDniSocio(presta.getDniSocio());
-        savedPresta.setFechaPrestamo(presta.getFechaPrestamo());
-        savedPresta.setFechaDevolucion(presta.getFechaDevolucion());
+        BeanUtils.copyProperties(presta, savedPresta);
+        savedPresta.setIdPresta(id);
 
         try {
             savedPresta = prestaRepository.save(savedPresta);

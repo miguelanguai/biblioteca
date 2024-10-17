@@ -1,8 +1,6 @@
 package com.example.biblioteca.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -10,8 +8,7 @@ import jakarta.persistence.Table;
 @Table(name = "socio")
 public class SocioModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer idSocio;
+    private Integer dni;
 
     private String nombre;
 
@@ -19,12 +16,12 @@ public class SocioModel {
 
     private Integer telefono;
 
-    public Integer getIdSocio() {
-        return idSocio;
+    public Integer getDni() {
+        return dni;
     }
 
-    public void setIdSocio(Integer idSocio) {
-        this.idSocio = idSocio;
+    public void setDni(Integer dni) {
+        this.dni = dni;
     }
 
     public String getNombre() {

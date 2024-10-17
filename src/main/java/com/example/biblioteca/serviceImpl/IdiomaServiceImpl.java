@@ -2,6 +2,7 @@ package com.example.biblioteca.serviceImpl;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,7 @@ public class IdiomaServiceImpl implements IdiomaService {
         } else {
             savedIdioma = idiomaRepository.findById(id).orElse(null);
         }
-        savedIdioma.setDescripcion(idioma.getDescripcion());
+        BeanUtils.copyProperties(idioma, savedIdioma);
 
         try {
             savedIdioma = idiomaRepository.save(savedIdioma);

@@ -2,6 +2,7 @@ package com.example.biblioteca.serviceImpl;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,8 @@ public class EjemplarServiceImpl implements EjemplarService {
         } else {
             savedEjemplar = ejemplarRepository.findById(id).orElse(null);
         }
-        savedEjemplar.setIdLibro(ejemplar.getIdLibro());
+        BeanUtils.copyProperties(ejemplar, savedEjemplar);
+        savedEjemplar.setEjemplar_id(id);
 
         try {
             savedEjemplar = ejemplarRepository.save(savedEjemplar);

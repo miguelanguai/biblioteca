@@ -2,6 +2,7 @@ package com.example.biblioteca.serviceImpl;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +24,8 @@ public class AutorServiceImpl implements AutorService {
         } else {
             savedAuthor = autorRepository.findById(id).orElse(null);
         }
-        savedAuthor.setNombre(autor.getNombre());
-        savedAuthor.setLibroId(autor.getLibroId());
+        BeanUtils.copyProperties(autor, savedAuthor);
+        savedAuthor.setIdAutor(id);
 
         try {
             savedAuthor = autorRepository.save(savedAuthor);

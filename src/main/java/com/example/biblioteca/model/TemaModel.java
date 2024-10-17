@@ -1,9 +1,14 @@
 package com.example.biblioteca.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,8 +20,9 @@ public class TemaModel {
 
     private String nombre;
 
-    // este luego cambia para claves foráneas
-    private Integer libroId;
+    @ManyToMany(mappedBy = "temas")
+    @JsonIgnore
+    private List<LibroModel> libros;
 
     public Integer getIdTema() {
         return idTema;
@@ -34,12 +40,12 @@ public class TemaModel {
         this.nombre = nombre;
     }
 
-    public Integer getLibroId() {
-        return libroId;
+    public List<LibroModel> getLibros() {
+        return libros;
     }
 
-    public void setLibroId(Integer libroId) {
-        this.libroId = libroId;
+    public void setLibros(List<LibroModel> libros) {
+        this.libros = libros;
     }
 
 }

@@ -1,10 +1,16 @@
 package com.example.biblioteca.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -20,8 +26,23 @@ public class LibroModel {
 
     private String titulo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference("idioma-libros")
+    @ManyToOne
+    @JoinColumn(name = "idioma_id")
     private IdiomaModel idioma;
+
+    @ManyToMany
+    @JoinTable(name = "libro_autor", joinColumns = @JoinColumn(name = "idLibro"), inverseJoinColumns = @JoinColumn(name = "autor_id"))
+    private List<AutorModel> autores;
+
+    @ManyToMany
+    @JoinTable(name = "libro_tema", joinColumns = @JoinColumn(name = "idLibro"), inverseJoinColumns = @JoinColumn(name = "tema_id"))
+    private List<TemaModel> temas;
+
+    @JsonBackReference("ejemplar-libros")
+    @ManyToOne
+    @JoinColumn(name = "ejemplar_id")
+    private EjemplarModel ejemplar;
 
     public Integer getIdLibro() {
         return idLibro;
@@ -53,6 +74,22 @@ public class LibroModel {
 
     public void setIdioma(IdiomaModel idioma) {
         this.idioma = idioma;
+    }
+
+    public List<AutorModel> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<AutorModel> autores) {
+        this.autores = autores;
+    }
+
+    public List<TemaModel> getTemas() {
+        return temas;
+    }
+
+    public void setTemas(List<TemaModel> temas) {
+        this.temas = temas;
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.biblioteca.serviceImpl;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +24,8 @@ public class TemaServiceImpl implements TemaService {
         } else {
             savedTema = temaRepository.findById(id).orElse(null);
         }
-        savedTema.setNombre(tema.getNombre());
-        savedTema.setLibroId(tema.getLibroId());
+        BeanUtils.copyProperties(tema, savedTema);
+        savedTema.setIdTema(id);
 
         try {
             savedTema = temaRepository.save(savedTema);

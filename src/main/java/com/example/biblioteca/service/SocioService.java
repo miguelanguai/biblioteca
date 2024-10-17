@@ -5,11 +5,11 @@ import java.util.List;
 import com.example.biblioteca.model.SocioModel;
 
 public interface SocioService {
-    void save(Integer id, SocioModel tema);
+    void save(Integer dni, SocioModel tema);
 
-    SocioModel getSocioById(Integer id);
+    SocioModel getSocioByDni(Integer dni);
 
-    void delete(Integer id);
+    void delete(Integer dni);
 
     List<SocioModel> findAll();
 }

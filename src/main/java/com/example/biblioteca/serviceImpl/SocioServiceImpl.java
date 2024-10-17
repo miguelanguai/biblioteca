@@ -2,6 +2,7 @@ package com.example.biblioteca.serviceImpl;
 
 import java.util.List;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,16 +17,15 @@ public class SocioServiceImpl implements SocioService {
     SocioRepository socioRepository;
 
     @Override
-    public void save(Integer id, SocioModel socio) {
+    public void save(Integer dni, SocioModel socio) {
         SocioModel savedSocio;
-        if (id == null) {
+        if (dni == null) {
             savedSocio = new SocioModel();
         } else {
-            savedSocio = socioRepository.findById(id).orElse(null);
+            savedSocio = socioRepository.findById(dni).orElse(null);
         }
-        savedSocio.setNombre(socio.getNombre());
-        savedSocio.setDomicilio(socio.getDomicilio());
-        savedSocio.setTelefono(socio.getTelefono());
+        BeanUtils.copyProperties(socio, savedSocio);
+        savedSocio.setDni(dni);
 
         try {
             savedSocio = socioRepository.save(savedSocio);
@@ -36,10 +36,10 @@ public class SocioServiceImpl implements SocioService {
     }
 
     @Override
-    public SocioModel getSocioById(Integer id) {
+    public SocioModel getSocioByDni(Integer dni) {
         SocioModel socio = new SocioModel();
         try {
-            socio = socioRepository.findById(id).get();
+            socio = socioRepository.findById(dni).orElse(null);
         } catch (Exception e) {
             System.out.println("[getSocioById] exception: " + e.getMessage());
         }
@@ -47,13 +47,13 @@ public class SocioServiceImpl implements SocioService {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void delete(Integer dni) {
         try {
-            this.socioRepository.findById(id).orElse(null);
+            this.socioRepository.findById(dni).orElse(null);
         } catch (Exception e) {
             System.out.println("[delete] exception: Not exists: " + e.getMessage());
         }
-        this.socioRepository.deleteById(id);
+        this.socioRepository.deleteById(dni);
 
     }
 

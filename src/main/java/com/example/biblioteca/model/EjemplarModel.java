@@ -1,9 +1,14 @@
 package com.example.biblioteca.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -12,24 +17,26 @@ public class EjemplarModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer idEjemplar;
+    private Integer ejemplar_id;
 
-    private Integer idLibro;
+    @JsonManagedReference("ejemplar-libros")
+    @OneToMany(mappedBy = "ejemplar")
+    private List<LibroModel> libros;
 
-    public Integer getIdEjemplar() {
-        return idEjemplar;
+    public Integer getEjemplar_id() {
+        return ejemplar_id;
     }
 
-    public void setIdEjemplar(Integer idEjemplar) {
-        this.idEjemplar = idEjemplar;
+    public void setEjemplar_id(Integer ejemplar_id) {
+        this.ejemplar_id = ejemplar_id;
     }
 
-    public Integer getIdLibro() {
-        return idLibro;
+    public List<LibroModel> getLibros() {
+        return libros;
     }
 
-    public void setIdLibro(Integer idLibro) {
-        this.idLibro = idLibro;
+    public void setLibros(List<LibroModel> libros) {
+        this.libros = libros;
     }
 
 }

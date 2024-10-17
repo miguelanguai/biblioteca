@@ -6,6 +6,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,11 +18,13 @@ public class PrestaModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idPresta;
 
-    private Integer idLibro;
+    @ManyToOne
+    @JoinColumn(name = "idEjemplar", nullable = false)
+    private EjemplarModel ejemplar;
 
-    private Integer idEjemplar;
-
-    private Integer dniSocio;
+    @ManyToOne
+    @JoinColumn(name = "dni", nullable = false)
+    private SocioModel socio;
 
     private LocalDate fechaPrestamo;
 
@@ -34,28 +38,20 @@ public class PrestaModel {
         this.idPresta = idPresta;
     }
 
-    public Integer getIdLibro() {
-        return idLibro;
+    public EjemplarModel getEjemplar() {
+        return ejemplar;
     }
 
-    public void setIdLibro(Integer idLibro) {
-        this.idLibro = idLibro;
+    public void setEjemplar(EjemplarModel ejemplar) {
+        this.ejemplar = ejemplar;
     }
 
-    public Integer getIdEjemplar() {
-        return idEjemplar;
+    public SocioModel getSocio() {
+        return socio;
     }
 
-    public void setIdEjemplar(Integer idEjemplar) {
-        this.idEjemplar = idEjemplar;
-    }
-
-    public Integer getDniSocio() {
-        return dniSocio;
-    }
-
-    public void setDniSocio(Integer dniSocio) {
-        this.dniSocio = dniSocio;
+    public void setSocio(SocioModel socio) {
+        this.socio = socio;
     }
 
     public LocalDate getFechaPrestamo() {
