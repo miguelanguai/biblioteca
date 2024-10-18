@@ -26,7 +26,7 @@ public class SocioController {
 
     @RequestMapping(path = { "/{id}" }, method = RequestMethod.GET)
     public SocioModel getSocioById(@PathVariable Integer id) {
-        return socioService.getSocioById(id);
+        return socioService.getSocioByDni(id);
     }
 
     @RequestMapping(path = { "/{id}" }, method = RequestMethod.DELETE)

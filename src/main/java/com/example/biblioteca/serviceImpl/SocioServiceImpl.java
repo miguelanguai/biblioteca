@@ -25,7 +25,6 @@ public class SocioServiceImpl implements SocioService {
             savedSocio = socioRepository.findById(dni).orElse(null);
         }
         BeanUtils.copyProperties(socio, savedSocio);
-        savedSocio.setDni(dni);
 
         try {
             savedSocio = socioRepository.save(savedSocio);
