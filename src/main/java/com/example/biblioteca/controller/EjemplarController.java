@@ -1,7 +1,9 @@
 package com.example.biblioteca.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +17,10 @@ import com.example.biblioteca.service.EjemplarService;
 @RestController
 @RequestMapping(value = "")
 public class EjemplarController {
+
+    @Autowired
+    ModelMapper mapper;
+
     @Autowired
     EjemplarService ejemplarService;
 
@@ -35,6 +41,7 @@ public class EjemplarController {
 
     @RequestMapping(path = { "/p/ejemplar/all" }, method = RequestMethod.GET)
     public List<EjemplarModel> findAll() {
-        return ejemplarService.findAll();
+        List<EjemplarModel> ejemplares = this.ejemplarService.findAll();
+        return ejemplares.stream().map(e -> mapper.map(e, EjemplarModel.class)).collect(Collectors.toList());
     }
 }

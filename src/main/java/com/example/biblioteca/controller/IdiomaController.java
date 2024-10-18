@@ -1,7 +1,9 @@
 package com.example.biblioteca.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,9 @@ import com.example.biblioteca.service.IdiomaService;
 @RestController
 @RequestMapping(value = "")
 public class IdiomaController {
+
+    @Autowired
+    ModelMapper mapper;
 
     @Autowired
     IdiomaService idiomaService;
@@ -37,6 +42,7 @@ public class IdiomaController {
 
     @RequestMapping(path = { "/p/idioma/all" }, method = RequestMethod.GET)
     public List<IdiomaModel> findAll() {
-        return idiomaService.findAll();
+        List<IdiomaModel> idiomas = this.idiomaService.findAll();
+        return idiomas.stream().map(e -> mapper.map(e, IdiomaModel.class)).collect(Collectors.toList());
     }
 }
