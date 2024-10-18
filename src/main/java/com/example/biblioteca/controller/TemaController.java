@@ -13,28 +13,28 @@ import com.example.biblioteca.model.TemaModel;
 import com.example.biblioteca.service.TemaService;
 
 @RestController
-@RequestMapping(value = "/tema")
+@RequestMapping(value = "")
 public class TemaController {
 
     @Autowired
     TemaService temaService;
 
-    @RequestMapping(path = { "/save", "/save/{id}" }, method = RequestMethod.PUT)
+    @RequestMapping(path = { "/u/tema/save", "/u//temasave/{id}" }, method = RequestMethod.PUT)
     public void save(@PathVariable(name = "id", required = false) Integer id, @RequestBody TemaModel tema) {
         this.temaService.save(id, tema);
     }
 
-    @RequestMapping(path = { "/{id}" }, method = RequestMethod.GET)
+    @RequestMapping(path = { "/p/tema/{id}" }, method = RequestMethod.GET)
     public TemaModel getTemaById(@PathVariable Integer id) {
         return temaService.getTemaById(id);
     }
 
-    @RequestMapping(path = { "/{id}" }, method = RequestMethod.DELETE)
+    @RequestMapping(path = { "/u/tema/{id}" }, method = RequestMethod.DELETE)
     public void delete(@PathVariable Integer id) {
         this.temaService.delete(id);
     }
 
-    @RequestMapping(path = { "/all" }, method = RequestMethod.GET)
+    @RequestMapping(path = { "/p/tema/all" }, method = RequestMethod.GET)
     public List<TemaModel> findAll() {
         return temaService.findAll();
     }

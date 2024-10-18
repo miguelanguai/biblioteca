@@ -14,28 +14,28 @@ import com.example.biblioteca.model.IdiomaModel;
 import com.example.biblioteca.service.IdiomaService;
 
 @RestController
-@RequestMapping(value = "/idioma")
+@RequestMapping(value = "")
 public class IdiomaController {
 
     @Autowired
     IdiomaService idiomaService;
 
-    @RequestMapping(path = { "/save", "/save/{id}" }, method = RequestMethod.PUT)
+    @RequestMapping(path = { "/u/idioma/save", "/u/idioma/save/{id}" }, method = RequestMethod.PUT)
     public void save(@PathVariable(name = "id", required = false) Integer id, @RequestBody IdiomaModel idioma) {
         idiomaService.save(id, idioma);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/p/idioma/{id}")
     public IdiomaModel getIdiomaById(@PathVariable Integer id) {
         return idiomaService.getIdiomaById(id);
     }
 
-    @RequestMapping(path = { "/{id}" }, method = RequestMethod.DELETE)
+    @RequestMapping(path = { "/u/idioma/{id}" }, method = RequestMethod.DELETE)
     public void delete(@PathVariable Integer id) {
         this.idiomaService.delete(id);
     }
 
-    @RequestMapping(path = { "/all" }, method = RequestMethod.GET)
+    @RequestMapping(path = { "/p/idioma/all" }, method = RequestMethod.GET)
     public List<IdiomaModel> findAll() {
         return idiomaService.findAll();
     }

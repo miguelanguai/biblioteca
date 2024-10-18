@@ -13,27 +13,27 @@ import com.example.biblioteca.model.EjemplarModel;
 import com.example.biblioteca.service.EjemplarService;
 
 @RestController
-@RequestMapping(value = "/ejemplar")
+@RequestMapping(value = "")
 public class EjemplarController {
     @Autowired
     EjemplarService ejemplarService;
 
-    @RequestMapping(path = { "/save", "/save/{id}" }, method = RequestMethod.PUT)
+    @RequestMapping(path = { "/u/ejemplar/save", "/u/ejemplar/save/{id}" }, method = RequestMethod.PUT)
     public void save(@PathVariable(name = "id", required = false) Integer id, @RequestBody EjemplarModel ejemplar) {
         this.ejemplarService.save(id, ejemplar);
     }
 
-    @RequestMapping(path = { "/{id}" }, method = RequestMethod.GET)
+    @RequestMapping(path = { "/p/ejemplar/{id}" }, method = RequestMethod.GET)
     public EjemplarModel getTemaById(@PathVariable Integer id) {
         return ejemplarService.getEjemplarById(id);
     }
 
-    @RequestMapping(path = { "/{id}" }, method = RequestMethod.DELETE)
+    @RequestMapping(path = { "/u/ejemplar/{id}" }, method = RequestMethod.DELETE)
     public void delete(@PathVariable Integer id) {
         this.ejemplarService.delete(id);
     }
 
-    @RequestMapping(path = { "/all" }, method = RequestMethod.GET)
+    @RequestMapping(path = { "/p/ejemplar/all" }, method = RequestMethod.GET)
     public List<EjemplarModel> findAll() {
         return ejemplarService.findAll();
     }

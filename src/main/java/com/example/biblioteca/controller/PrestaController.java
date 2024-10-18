@@ -13,28 +13,28 @@ import com.example.biblioteca.model.PrestaModel;
 import com.example.biblioteca.service.PrestaService;
 
 @RestController
-@RequestMapping(value = "/presta")
+@RequestMapping(value = "")
 public class PrestaController {
 
     @Autowired
     PrestaService prestaService;
 
-    @RequestMapping(path = { "/save", "/save/{id}" }, method = RequestMethod.PUT)
+    @RequestMapping(path = { "/u/presta/save", "/u/presta/save/{id}" }, method = RequestMethod.PUT)
     public void save(@PathVariable(name = "id", required = false) Integer id, @RequestBody PrestaModel tema) {
         this.prestaService.save(id, tema);
     }
 
-    @RequestMapping(path = { "/{id}" }, method = RequestMethod.GET)
+    @RequestMapping(path = { "/p/presta/{id}" }, method = RequestMethod.GET)
     public PrestaModel getTemaById(@PathVariable Integer id) {
         return prestaService.getPrestaById(id);
     }
 
-    @RequestMapping(path = { "/{id}" }, method = RequestMethod.DELETE)
+    @RequestMapping(path = { "/u/presta/{id}" }, method = RequestMethod.DELETE)
     public void delete(@PathVariable Integer id) {
         this.prestaService.delete(id);
     }
 
-    @RequestMapping(path = { "/all" }, method = RequestMethod.GET)
+    @RequestMapping(path = { "/p/presta/all" }, method = RequestMethod.GET)
     public List<PrestaModel> findAll() {
         return prestaService.findAll();
     }

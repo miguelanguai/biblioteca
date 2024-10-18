@@ -14,28 +14,28 @@ import com.example.biblioteca.model.AutorModel;
 import com.example.biblioteca.service.AutorService;
 
 @RestController
-@RequestMapping(value = "/autor")
+@RequestMapping(value = "")
 public class AutorController {
 
     @Autowired
     AutorService autorService;
 
-    @RequestMapping(path = { "/save", "/save/{id}" }, method = RequestMethod.PUT)
+    @RequestMapping(path = { "/u/autor/save", "/u/autor/save/{id}" }, method = RequestMethod.PUT)
     public void save(@PathVariable(name = "id", required = false) Integer id, @RequestBody AutorModel autor) {
         autorService.save(id, autor);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/p/autor/{id}")
     public AutorModel getAutorById(@PathVariable Integer id) {
         return autorService.getAutorById(id);
     }
 
-    @RequestMapping(path = { "/{id}" }, method = RequestMethod.DELETE)
+    @RequestMapping(path = { "/u/autor/{id}" }, method = RequestMethod.DELETE)
     public void delete(@PathVariable Integer id) {
         this.autorService.delete(id);
     }
 
-    @RequestMapping(path = { "/all" }, method = RequestMethod.GET)
+    @RequestMapping(path = { "/p/autor/all" }, method = RequestMethod.GET)
     public List<AutorModel> findAll() {
         return autorService.findAll();
     }

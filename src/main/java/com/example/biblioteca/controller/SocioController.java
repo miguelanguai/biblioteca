@@ -13,28 +13,28 @@ import com.example.biblioteca.model.SocioModel;
 import com.example.biblioteca.service.SocioService;
 
 @RestController
-@RequestMapping(value = "/socio")
+@RequestMapping(value = "")
 public class SocioController {
 
     @Autowired
     SocioService socioService;
 
-    @RequestMapping(path = { "/save", "/save/{id}" }, method = RequestMethod.PUT)
+    @RequestMapping(path = { "/u/socio/save", "/u/socio/save/{id}" }, method = RequestMethod.PUT)
     public void save(@PathVariable(name = "id", required = false) Integer id, @RequestBody SocioModel tema) {
         this.socioService.save(id, tema);
     }
 
-    @RequestMapping(path = { "/{id}" }, method = RequestMethod.GET)
+    @RequestMapping(path = { "/p/socio/{id}" }, method = RequestMethod.GET)
     public SocioModel getSocioById(@PathVariable Integer id) {
         return socioService.getSocioByDni(id);
     }
 
-    @RequestMapping(path = { "/{id}" }, method = RequestMethod.DELETE)
+    @RequestMapping(path = { "/u/socio/{id}" }, method = RequestMethod.DELETE)
     public void delete(@PathVariable Integer id) {
         this.socioService.delete(id);
     }
 
-    @RequestMapping(path = { "/all" }, method = RequestMethod.GET)
+    @RequestMapping(path = { "/p/socio/all" }, method = RequestMethod.GET)
     public List<SocioModel> findAll() {
         return socioService.findAll();
     }
